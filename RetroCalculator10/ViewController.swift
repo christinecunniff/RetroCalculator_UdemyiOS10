@@ -41,6 +41,11 @@ class ViewController: UIViewController {
     @IBAction func numberPressed(sender: UIButton) {
         playSound()
         
+        if currentOperation == Operations.Empty {
+            if (leftValStr == "0" && runningNumber == "") {
+                return
+            }
+        }
         runningNumber += "\(sender.tag)"
         outputLabel.text = runningNumber
     }
@@ -63,6 +68,15 @@ class ViewController: UIViewController {
     
     @IBAction func onEqualPressed(sender: AnyObject) {
         processOperation(operation: currentOperation)
+    }
+    
+    @IBAction func onClearPressed(sender: AnyObject) {
+        runningNumber = ""
+        leftValStr = ""
+        rightValStr = ""
+        result = ""
+        currentOperation = Operations.Empty
+        outputLabel.text = "0"
     }
     
     func playSound() {
